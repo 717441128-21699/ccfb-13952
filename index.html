@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>钢包红外热像在线监测系统</title>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>钢包红外热像在线监测</h1>
+        <div class="sub">包壁展开 · 耐材跟踪 · 热点报警 · 换砖预警（WebGL2 / TypeScript）</div>
+      </header>
+
+      <section class="toolbar">
+        <div id="scenario-buttons" class="scenario-group"></div>
+        <button id="run" class="primary">生成并处理序列</button>
+        <div class="progress-wrap"><div id="progress" class="progress"></div></div>
+      </section>
+
+      <section class="panels">
+        <div class="panel">
+          <h2>原始热像（含包壁掩码）</h2>
+          <canvas id="frame-canvas" width="320" height="240"></canvas>
+        </div>
+        <div class="panel">
+          <h2>包壁展开图（360°×96，环向 φ / 高度 h）</h2>
+          <canvas id="map-canvas" width="720" height="192"></canvas>
+        </div>
+      </section>
+
+      <section class="control">
+        <label>帧拖动对比：<input id="frame-slider" type="range" min="0" max="0" value="0" /></label>
+        <select id="compare-select"></select>
+      </section>
+
+      <section class="dash">
+        <div class="panel">
+          <h2>实时指标</h2>
+          <div id="metrics" class="metrics muted">尚未处理序列</div>
+        </div>
+        <div class="panel">
+          <h2>超阈报警（≥阈值持续 3 秒）</h2>
+          <ul id="alarm-list" class="list"><li class="muted">无</li></ul>
+        </div>
+        <div class="panel">
+          <h2>磨损换砖预警</h2>
+          <ul id="advisory-list" class="list"><li class="muted">无</li></ul>
+        </div>
+      </section>
+
+      <section class="footer">
+        <div id="profile-info" class="muted">未建档</div>
+        <div class="exports">
+          <button id="export-csv">导出炉次 CSV</button>
+          <button id="export-adv">导出预警 CSV</button>
+          <button id="export-json">导出档案 JSON</button>
+        </div>
+      </section>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
